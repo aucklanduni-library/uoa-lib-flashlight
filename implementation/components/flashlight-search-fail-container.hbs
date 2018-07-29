@@ -1,0 +1,8 @@
+<div class="col-sm-12 col-md-10 col-md-offset-1 col-xl-8 col-xl-offset-2 uoa-lib-no-padding uoa-lib-spacer-t-3 uoa-lib-record-item uoa-lib-search-fail-browse">
+    <h2 class="uoa-lib-minor uoa-lib-no-border">Or <strong>browsing</strong> by:</h2>
+    <ul class="uoa-lib-plain-list uoa-lib-v-list uoa-lib-browse-list default-show-3" role="navigation" aria-label="Browse facets" style="margin-bottom: 5em;">
+        {{#each facetsDescription.browsableFacets as |facet|}}
+            <li>{{#link-to "browse" facet.key}}{{facet.display}}{{/link-to}}</li>
+        {{/each}}
+    </ul>
+</div>

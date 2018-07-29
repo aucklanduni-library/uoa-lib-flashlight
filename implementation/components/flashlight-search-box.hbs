@@ -1,0 +1,8 @@
+{{!-- Component is a form, with inline-form class --}}
+<div class="uoa-lib-search-wrapper">
+    <div class="uoa-lib-search-form-toggled uoa-lib-glyph-md" >
+        <span class="uoa-lib-search-icon"><span class="glyphicons glyphicons-search "></span></span>
+        {{input value=(mut searchTerm) class="uoa-lib-search-box" name="q" autofocus=true enter=(action "searchUsingCurrentTerm") disabled=this.disableSearch placeholder=placeholder}}
+        <input type="submit" value="Search" class="uoa-lib-submit-button" {{action "searchUsingCurrentTerm"}}>
+    </div>
+</div>

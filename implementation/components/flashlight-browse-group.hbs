@@ -1,0 +1,29 @@
+<h2>
+    <span class="sm-mobile-off">{{currentFacetGroup.display}}</span>
+    <span class="uoa-lib-minor xs-small">{{format-number-thousands currentFacetGroup.allValues.length}} {{lower-case-string
+            (is-array-plural currentFacetGroup.allValues
+                (get facetsDescription.displayNamePluralLookupMap currentFacetGroup.facet)
+                (get facetsDescription.displayNameLookupMap currentFacetGroup.facet)
+            )  }}</span>
+</h2>
+
+<!-- menu item count -->
+<p></p>
+
+<ul class="uoa-lib-plain-list uoa-lib-index uoa-lib-title-links uoa-lib-show-badges">
+    {{#if browseItemComponentName}}
+        {{#each values as |group|}}
+            {{component browseItemComponentName group=group currentFacetGroup=currentFacetGroup facetedSearchBaseRouteName=facetedSearchBaseRouteName viewItem=viewItem viewFacetedSearch=viewFacetedSearch }}
+        {{/each}}
+    {{else}}
+        {{#each values as |group|}}
+            <li>
+                <a href={{flashlight-faceted-search-base-link currentFacetGroup.facet group.value facetedSearchBaseRouteName=facetedSearchBaseRouteName}} {{action (action viewFacetedSearch group.value)}}>
+                    <span class="uoa-lib-badge">{{format-number-thousands group.count}}</span> {{group.value}}
+                </a>
+            </li>
+        {{/each}}
+    {{/if}}
+</ul>
+
+{{flashlight-pagination-bar skipTo=(action skipTo) pageSize=pageSize skip=offset total=totalValueCount}}

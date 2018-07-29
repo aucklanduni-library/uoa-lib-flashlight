@@ -1,0 +1,20 @@
+<div class="facet-all-values-picker-inner-holder">
+
+    <div class="toolbar-fixed">
+        <button class="tmp-close-button" {{action (action closeOverlay)}}><span class="glyphicons glyphicons-remove"></span></button>
+
+        {{input value=(mut filterTextValue) placeholder=(concat 'Search ' (lower-case-string (get facetsDescription.displayNamePluralLookupMap filterKey)) "..." )}}
+    </div>
+
+    <div class="tmp-facet-container">
+        <ul class="uoa-lib-plain-list">
+            {{#each pageDisplayValues as |v|}}
+                <li {{action "addFilter" v.label}}>
+                    <a href={{flashlight-search-link-with-filter settings filterKey v.label returnPath=returnPath}}>{{v.label}}</a> <span class="uoa-lib-badge">{{format-number-thousands v.count}}</span>
+                </li>
+            {{/each}}
+        </ul>
+
+        {{flashlight-pagination-bar skipTo=(action "skipTo") pageSize=pageSize skip=skip total=displayTotal}}
+    </div>
+</div>

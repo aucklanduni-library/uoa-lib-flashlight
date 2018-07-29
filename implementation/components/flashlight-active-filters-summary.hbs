@@ -1,0 +1,24 @@
+<!--search term -->
+{{#if settings.searchTerm}}
+    <h3 class="element-invisible">Keyword:</h3>
+    <ul class="uoa-lib-h-list uoa-lib-tool-bar uoa-lib-active-filter-group  -uoa-lib-tool-bar-padding-md">
+        <li class="uoa-lib-search-term"><a href="" class="uoa-lib-active-filter" {{action "removeSearchTerm"}}><span class="glyphicons glyphicons-remove"></span> {{settings.searchTerm}}</a></li>
+    </ul>
+{{/if}}
+
+<!-- active filters -->
+{{#if filters}}
+    <h3 class="element-invisible">Active filters:</h3>
+    <ul class="uoa-lib-h-list uoa-lib-tool-bar uoa-lib-active-filter-group  -uoa-lib-tool-bar-padding-md">
+        {{#each filters as |filter|}}
+            <li class={{concat "filter-" filter.key}}>
+                <a class="uoa-lib-active-filter" href={{flashlight-search-link-without-filter settings filter.key filter.value returnPath=returnPath}} {{action "removeFilter" filter}}>
+                    <span class="glyphicons glyphicons-remove"></span>{{#if filter.prefix}}{{filter.prefix}}{{/if}} {{filter.value}}
+                </a>
+            </li>
+        {{/each}}
+        {{#if (array-with-n-or-more filters 2)}}
+            <li class=""><a class="uoa-lib-active-filter-clear" href={{flashlight-search-link-no-filters settings returnPath=returnPath}} {{action "clearAllFilters"}}>Clear All</a></li>
+        {{/if}}
+    </ul>
+{{/if}}

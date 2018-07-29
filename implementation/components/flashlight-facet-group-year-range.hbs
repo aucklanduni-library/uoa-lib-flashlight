@@ -1,0 +1,45 @@
+<span class="uoa-lib-facet-title">
+    <h4>
+        {{filter.display}}
+        {{#if filter.help}}
+            <span class="help-item glyphicons glyphicons-question-sign" data-toggle="popover" data-placement="top" title={{concat "About: " filter.display}} data-content={{filter.help}}></span>
+        {{/if}}
+    </h4>
+</span>
+<form>
+
+    <ul class="uoa-lib-h-list uoa-lib-date-picker">
+        <li>
+            <label for="date-start">From</label>
+            <div class="date-input-wrapper">
+                {{input id="date-start" value=(mut startYear) name="start_year"}}
+                <div class="increment-container">
+                    <button id="date-start-increase" class="increment increase">
+                        <span class="glyphicons glyphicons-chevron-up" aria-hidden="true"></span><span class="element-invisible">Increase date</span>
+                    </button>
+                    <button id="date-start-decrease" class="increment decrease">
+                        <span class="glyphicons glyphicons-chevron-down" aria-hidden="true"></span><span class="element-invisible">Decrease date</span>
+                    </button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <label for="date-end">To</label>
+            <div class="date-input-wrapper">
+                {{input id="date-end" value=(mut endYear) name="end_year"}}
+                <div class="increment-container">
+                    <button id="date-end-increase" class="increment increase">
+                        <span class="glyphicons glyphicons-chevron-up" aria-hidden="true"></span><span class="element-invisible">Increase date</span>
+                    </button>
+                    <button id="date-end-decrease" class="increment decrease">
+                        <span class="glyphicons glyphicons-chevron-down" aria-hidden="true"></span><span class="element-invisible">Decrease date</span>
+                    </button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <label></label>
+            <button class="plain-button" {{action "applyYearRange"}} >Apply</button>
+        </li>
+    </ul>
+</form>

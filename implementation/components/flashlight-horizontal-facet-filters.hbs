@@ -1,0 +1,42 @@
+<div class="col-sm-12 uoa-lib-no-padding text-center">
+    <a id="uoa-lib-collapse-toggle" aria-label="Show/hide facets"><span><span class="glyphicons glyphicons-chevron-down"></span></span></a>
+    <div class="uoa-lib-discovery-container" style="overflow: auto;position: static;padding:0em;">
+        <p id="search-filters" class="element-invisible">Search filters</p>
+        <ul class="-uoa-lib-h-list uoa-lib-scope-container" style="overflow: auto;position: static;">
+            <li style='position:static;' class="uoa-lib-has-rh-control uoa-lib-glyph-sm uoa-lib-collapse-sm">
+                <span class="uoa-lib-scope-prefix uoa-lib-solo">{{this.defaultPrompt}}</span>
+            </li>
+
+            {{#each this.filters as |filter|}}
+                <li style='position:static;' class="uoa-lib-has-rh-control uoa-lib-glyph-sm uoa-lib-collapse-sm" id="uoa-lib-filter-toggle">
+
+                    <span class="uoa-lib-scope-filter-item uoa-lib-tab toggle-facet" id={{concat 'uoa-lib-filter-' filter.key '-toggle'}} tabindex="0">
+                        <span class="uoa-lib-label">{{filter.display}}</span>
+
+                        {{#each filter.activeFilters as |activeFilter|}}
+                            <!--a href="#"--><span class="uoa-lib-active-filter" {{action "removeActiveFilter" filter.key activeFilter}}><span class="glyphicons glyphicons-circle-remove"></span> {{activeFilter}}</span><!--/a-->
+                        {{/each}}
+
+                        <span class="uoa-lib-control"><span class="caret"></span></span>
+                    </span>
+
+                    <div class="toggle-facet-pane uoa-lib-filter-value-list {{concat 'uoa-lib-filter-' filter.key '-toggle'}}">
+
+                        <div class="text-left -uoa-lib-filter-value-list">
+                            <ul class="uoa-lib-container-md uoa-lib-plain-list uoa-lib-wrap-col js-nav-cat-content">
+                                {{#each filter.values as |value|}}
+                                    <li>
+                                        <a href="#" {{action "addActiveFilter" filter.key value.label}}>{{value.label}}<span class="uoa-lib-badge">{{value.count}}</span></a>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </li>
+            {{/each}}
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+{{#each results.items as |item index|}}
+    {{component searchResultItemComponentName linkContext=(hash item=item userIndex=(user-array-index index settings.fetchSkip))
+                    item=item settings=settings index=(user-array-index index settings.fetchSkip) hasOrdinals=hasOrdinals
+                        verticalListing=verticalListing viewItem=(action viewItem) performSearch=(action performSearch)
+                            addActiveFilter=(action "addActiveFilter") removeActiveFilter=(action "removeActiveFilter")
+                                returnPath=returnPath}}
+{{/each}}

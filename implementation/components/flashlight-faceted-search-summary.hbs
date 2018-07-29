@@ -1,0 +1,15 @@
+<div class="container-fluid uoa-lib-spacer-t-1 uoa-lib-spacer-b-2   -uoa-lib-no-padding">
+    <div class="row uoa-lib-container-md uoa-lib-no-padding">
+        <div class="col-sm-12 uoa-lib-no-padding">
+            <h1 class="uoa-lib-header-menu">
+                <span class="uoa-lib-title-contrast">               
+                      {{#link-to browseRouteBaseName facetedFilterPair.key}}{{get facetsDescription.displayNameLookupMap facetedFilterPair.key}} {{/link-to}}
+                      {{#link-to browseRouteName facetedFilterPair.key (query-params g=(initial-grouping-from-term facetedFilterPair.value symbolGroupingValue))}}
+                        {{initial-grouping-from-term facetedFilterPair.value symbolGroupingValue}}
+                      {{/link-to}}              
+                </span>
+                {{facetedFilterPair.value}}
+            </h1>
+        </div>
+    </div>
+</div>

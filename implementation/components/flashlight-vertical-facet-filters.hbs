@@ -1,0 +1,27 @@
+<div class="col-sm-12 col-md-3 -col-md-pull-9 col-xl-2 -col-xl-pull-10 uoa-lib-no-padding no-print">
+    <div class="uoa-lib-facet-group -uoa-lib-facet-group-lh {{if appendShowToFacetGroup "show"}}">
+
+        <h3 id="facet-group-toggle" onclick={{action "changeAppendShow" true}}><span class="glyphicons glyphicons-filter"></span> Refine <span class="uoa-lib-title-contrast">your results</span></h3>
+        <button class="close-facet-group" onclick={{action "changeAppendShow" false}}><span class="glyphicons glyphicons-remove" aria-hidden="true"></span> <span class="element-invisible">Close</span></button>
+
+        {{#each this.filters as |filter|}}
+            {{#if filter.componentName}}
+                {{component filter.componentName results=results settings=results.settings filter=filter appendShowClass=appendShowToFacetGroups performSearch=(action performSearch)
+                            addActiveFilter=(action "addActiveFilter") removeActiveFilter=(action "removeActiveFilter") showFilterValuesPicker=(action "showFilterValuesPickerForFacet")
+                                returnPath=returnPath }}
+            {{else}}
+                {{component (get-with-default this.facetTypeToComponentMapping filter.type this.defaultFacetGroupComponentName)
+                            results=results settings=results.settings filter=filter appendShowClass=appendShowToFacetGroups performSearch=(action performSearch)
+                            addActiveFilter=(action "addActiveFilter") removeActiveFilter=(action "removeActiveFilter") showFilterValuesPicker=(action "showFilterValuesPickerForFacet")
+                                returnPath=returnPath }}
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
+
+{{#if currentAllFiltersPickerSetup}}
+    {{flashlight-facet-all-values-picker settings=results.settings filterKey=currentAllFiltersPickerSetup.facet filterTotal=currentAllFiltersPickerSetup.totalCount
+                                            searchFilterResolver=searchFilterResolver facetsDescription=facetsDescription
+                                                addActiveFilter=(action "addActiveFilter") removeActiveFilter=(action "removeActiveFilter") closeOverlay=(action "hideFilterValuePicker")
+                                                    returnPath=returnPath}}
+{{/if}}

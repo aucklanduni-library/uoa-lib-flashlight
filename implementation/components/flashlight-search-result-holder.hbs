@@ -1,0 +1,97 @@
+{{#if results.hasResults}}
+
+    {{!-- Search Box ---}}
+    {{#if hasSearchBox}}
+        <div id={{if searchBoxAsRibbon "uoa-lib-min-search-container" "uoa-lib-search-container"}}
+                     class={{if searchBoxAsRibbon "container-fluid" "container uoa-lib-container-md uoa-lib-no-padding no-print"}}>
+            <div class="row uoa-lib-no-padding">
+                <div class={{if searchBoxAsRibbon "col-sm-12 col-md-10 col-md-offset-1 col-xl-8 col-xl-offset-2 uoa-lib-no-padding" "col-sm-12 col-md-6 uoa-lib-no-padding"}}>
+                    {{component this.searchBoxComponentName settings=settings performSearch=(action performSearch) returnPath=returnPath}}
+                </div>
+            </div>
+
+            {{#if hasHorizontalFacetFilters}}
+                {{component this.horizontalFacetFiltersComponentName results=results facetsDescription=facetsDescription searchFilterResolver=searchFilterResolver
+                            performSearch=(action performSearch) returnPath=returnPath}}
+            {{/if}}
+        </div>
+    {{/if}}
+
+    <div class="container uoa-lib-spacer-b-1 uoa-lib-container-md uoa-lib-no-padding">
+
+        <div class="row uoa-lib-spacer-tb-3" role="main"  id="main-content">
+
+            <div class="{{if this.hasFacetsRight "col-sm-12 col-md-9 -col-md-push-3 col-xl-10 -col-xl-push-2" "col-sm-12 col-md-12"}} uoa-lib-no-padding uoa-lib-results-col">
+
+                {{!-- Active Filters Summary --}}
+                {{#if hasActiveFiltersSummary}}
+                    {{component this.activeFiltersSummaryComponentName results=results settings=settings facetsDescription=facetsDescription
+                                performSearch=(action performSearch) returnPath=returnPath}}
+                {{/if}}
+
+                {{!-- Paging Summary / Sorting Controls --}}
+                {{#if (any-value-truthy hasPagingSummary hasSortingControls)}}
+                    <div class="row">
+                        <div class="col-sm-12 uoa-lib-no-padding">
+                            {{#if hasPagingSummary}}
+                                {{component this.pagingSummaryComponentName results=results settings=settings facetsDescription=facetsDescription
+                                            performSearch=(action performSearch) returnPath=returnPath}}
+                            {{/if}}
+                            
+                             {{#if this.viewOptionComponentName }}
+                                {{component this.viewOptionComponentName targetSelector=".uoa-lib-result-set" targetClassName="uoa-lib-view-brief"}}
+                             {{/if}}
+
+                            {{#if (all-values-truthy hasSortingControls (array-with-items sortingOptions)) }}
+                                <div class="uoa-lib-right uoa-lib-sort-by" style="margin-top: .5em;">
+                                    {{component this.sortByButtonGroupComponentName results=results settings=settings sortingOptions=sortingOptions
+                                                facetsDescription=facetsDescription performSearch=(action performSearch)}}
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{!-- Search Results Listing --}}
+                {{component this.searchResultListComponentName results=results settings=settings searchResultItemComponentName=this.searchResultItemComponentName
+                            returnPath=returnPath viewItem=(action viewItem) verticalListing=this.verticalListing hasToolbarRight=this.hasToolbarRight hasFacetsRight=this.hasFacetsRight
+                                hasOrdinals=this.hasOrdinals performSearch=(action performSearch)}}
+
+            </div>
+
+            {{!-- Facets: Right-Hand Side ---}}
+            {{#if this.hasFacetsRight}}
+                {{component this.verticalFacetFiltersComponentName results=results facetsDescription=facetsDescription searchFilterResolver=searchFilterResolver
+                            performSearch=(action performSearch) returnPath=returnPath}}
+            {{/if}}
+
+        </div>
+
+        {{!-- Pagination Bar ---}}
+        {{component this.paginationBarComponentName results=results settings=settings performSearch=(action performSearch) returnPath=returnPath}}
+
+    </div>
+
+{{else}}
+
+    <div class="container-fluid uoa-lib-spacer-t-4 uoa-lib-container-md uoa-lib-no-padding">
+        <div class="row uoa-lib-spacer-t-3">
+            <div class="col-sm-12 col-md-10 col-md-offset-1 col-xl-8 col-xl-offset-2 uoa-lib-no-padding">
+                <h1 class="uoa-lib-spacer-b-2">We couldn't find any records  <span class="uoa-lib-title-contrast">matching your search</span></h1>
+                <h2 class="uoa-lib-minor uoa-lib-no-border"><strong>Try</strong> using different search terms</h2>
+            </div>
+        </div>
+
+        {{!-- Search Box ---}}
+        <div class="row uoa-lib-no-padding uoa-lib-spacer-t-3">
+            <div class="col-sm-12 col-md-10 col-md-offset-1 col-xl-8 col-xl-offset-2 uoa-lib-no-padding">
+                {{component this.searchBoxComponentName settings=settings performSearch=(action performSearch) returnPath=returnPath}}
+            </div>
+        </div>
+
+        {{component this.searchFailContainerComponentName settings=settings facetsDescription=facetsDescription}}
+        {{!-- Browse Facets listing... ---}}
+
+    </div>
+
+{{/if}}

@@ -1,0 +1,36 @@
+<span class="uoa-lib-facet-title">
+    <h4>
+        {{filter.display}}
+        {{#if filter.help}}
+            <span class="help-item glyphicons glyphicons-question-sign" data-toggle="popover" data-placement="top" title={{concat "About: " filter.display}} data-content={{filter.help}}></span>
+        {{/if}}
+    </h4>
+</span>
+<ul class="uoa-lib-plain-list {{if (array-with-n-or-more filter.values 11) "uoa-lib-clip-list"}}">
+
+    {{#each filter.values as |value|}}
+        <li>
+            {{#if value.active}}
+                <a href="#" {{action (action removeActiveFilter filter.key value.label)}} class="uoa-lib-facet-selected">
+                    <b>{{value.label}}</b>
+                    <span class="glyphicons glyphicons-remove uoa-lib-focus-on"></span>
+                    <span class="glyphicons glyphicons-remove uoa-lib-pull-left uoa-lib-focus-off"></span>
+                    <span class="uoa-lib-badge">{{format-number-thousands value.count}}</span>
+                </a>
+            {{else}}
+                <a href={{flashlight-search-link-with-filter settings filter.key value.label returnPath=returnPath}} {{action (action addActiveFilter filter.key value.label)}}>{{value.label}}
+                    <span class="uoa-lib-badge">{{format-number-thousands value.count}}</span>
+                </a>
+            {{/if}}
+        </li>
+    {{/each}}
+
+    <li class="toggle-clip-list-container">
+        {{#if (value-greater-than-array-length filter.distinct filter.values)}}
+            <span id="" class="clip-list-show-all" {{action (action showFilterValuesPicker filter.key)}}>Show all {{format-number-thousands filter.distinct}}<span id="artistbutton"></span> <span class="glyphicons glyphicons-chevron-right" aria-hidden="true" style="margin-top: 2px;font-size: 10px;"></span></span>
+        {{/if}}
+        <span class="toggle-clip-list js-requestallfacet" {{action "toggleClipList"}} aria-hidden="true">
+            <span class="glyphicons glyphicons-plus" aria-hidden="true" style="margin-top: 3px;font-size: 10px;"></span>
+        </span>
+    </li>
+</ul>

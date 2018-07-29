@@ -1,0 +1,16 @@
+<ul class="uoa-lib-h-list uoa-lib-az-nav" role="navigation" aria-label="facets A-Z menu">
+{{#if (array-with-n-or-more allFacetGroups 2)}}
+    {{#each allFacetGroups as |navigation|}}
+        {{#if (equal currentFacetGroup.group navigation.group)}}
+            <li class="az-item uoa-lib-active"><a href="#">{{navigation.display}}</a></li>
+        {{else}}
+            {{#if navigation.enable}}
+                <li class="az-item">{{#link-to browseRouteName facetKey (query-params g=navigation.link.g sg=navigation.link.sg o=0)}}{{navigation.display}}{{/link-to}}</li>
+            {{else}}
+                <li class="az-item uoa-lib-disable">{{navigation.display}}</li>
+            {{/if}}
+        {{/if}}
+    {{/each}}
+    <li class="toggle-menu"><span><span class="glyphicons glyphicons-chevron-down" aria-hidden="true"></span><span class="element-invisible">More</span></span>  </li>
+{{/if}}
+</ul>

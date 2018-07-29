@@ -1,0 +1,39 @@
+<div class="col-sm-12 uoa-lib-inline-tool-bar uoa-lib-glyph-md text-center">
+  <ul class="uoa-lib-h-list uoa-lib-tool-bar uoa-lib-paging uoa-lib-has-border {{if hasNoNextOrPrev "no-prev-next"}}" role="navigation" aria-label="Pagination">
+        {{#each paginationParts as |part|}}
+            {{#if part.isNext}}
+                {{#unless part.disabled}}
+                    <li class="uoa-lib-last">
+                        <a href="#" {{action "changeSkip" part.skip}} rel="next">
+                            <span class="glyphicons glyphicons-circle-arrow-right"></span><span class="element-invisible">Next</span>
+                        </a>
+                    </li>
+                {{/unless}}
+            {{/if}}
+
+            {{#if part.isPrev}}
+                {{#unless part.disabled}}
+                    <li class="uoa-lib-first">
+                        <a href='#' {{action "changeSkip" part.skip}} rel="prev">
+                            <span class="glyphicons glyphicons-circle-arrow-left"></span><span class="element-invisible">Previous</span>
+                        </a>
+                    </li>
+                {{/unless}}
+            {{/if}}
+
+            {{#if part.isCurrentPage}}
+                <li class="uoa-lib-active"><a href="#">{{format-number-thousands part.page}}<span class="uoa-lib-page-count"> of {{format-number-thousands totalPages}}</span></a></li>
+            {{/if}}
+
+            {{#if part.isPage}}
+                {{#unless part.disabled}}
+                    <li><a href="#" {{action "changeSkip" part.skip}}>{{format-number-thousands part.page}}<span class="uoa-lib-page-count"> of {{format-number-thousands totalPages}}</span></a></li>
+                {{/unless}}
+            {{/if}}
+
+            {{#if part.isGap}}
+                <li><a class="uoa-lib-disabled uoa-lib-glyph-sm"><span class="glyphicons glyphicons-more"></span></a></li>
+            {{/if}}
+        {{/each}}
+    </ul>
+</div>

@@ -1,0 +1,23 @@
+<div class="row uoa-lib-container-md">
+
+    <div class="col-sm-12">
+        <div id="favourite-container" class="uoa-lib-spacer-t-2">
+            {{#link-to "favourites"}}<h3 class="uoa-lib-header">My saved records</h3>{{/link-to}}
+
+            {{#each favouritesProvider.items as |item|}}
+                <div class="uoa-lib-glyph-sm">
+                    {{#link-to "item" item.id}}{{{if item.title item.title "[No title]"}}}{{/link-to}}
+                    <span {{action "removeItemFromFavourites" item}} class="glyphicons glyphicons-remove delete" role="button" data-toggle="tooltip" data-placement="left" data-original-title="Delete this item"></span>
+                </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+    <div class="col-sm-12 uoa-lib-spacer-b-3">
+        <div class="uoa-lib-tool-bar">
+            {{#link-to "favourites" class="uoa-lib-button uoa-lib-cta-secondary"}}Manage saved records{{/link-to}}
+        </div>
+    </div>
+
+</div>

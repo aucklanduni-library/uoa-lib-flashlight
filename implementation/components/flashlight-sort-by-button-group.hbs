@@ -1,0 +1,13 @@
+<div class="btn-group" role="group" aria-label="Sort-by">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort by: <b>{{#if selectedOption}}{{selectedOption.label}}{{else}}-{{/if}}</b>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {{#each sortingOptions as |so|}}
+                <li><a href="#" {{action "changeSorting" so}}>{{so.label}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

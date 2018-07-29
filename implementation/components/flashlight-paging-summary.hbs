@@ -1,0 +1,5 @@
+{{#if results.isSinglePage}}
+    <li class="uoa-lib-paging-summary">Showing <b>{{format-number-thousands results.totalItems}}</b> {{is-plural results.totalItems "results" "result"}}</li>
+{{else}}
+    <li class="uoa-lib-paging-summary">Showing <b>{{format-number-thousands (user-array-index results.firstItem)}}-{{format-number-thousands (user-array-index results.lastItem)}}</b> of <b>{{format-number-thousands results.totalItems}}</b> {{is-plural results.totalItems "results" "result"}}</li>
+{{/if}}

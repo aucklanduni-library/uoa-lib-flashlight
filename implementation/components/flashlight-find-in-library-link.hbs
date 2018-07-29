@@ -1,0 +1,34 @@
+
+    <div class="uoa-lib-section -uoa-lib-no-display js-section-alma">
+        <div class="tmp-alma-finder js-alma-finder">
+            <h3 class="">Publication links</h3>
+                <div class="uoa-lib-resolver-loader">
+                    <div class="spinner">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                </div>
+            {{#if loading}}
+                
+                    <span class="js-uresolver-link uoa-lib-uresolver-link js-find-in-library">Find In Library <span class="caret"></span></span>
+                    <span class=" js-uresolver-link uoa-lib-uresolver-link js-view-on-line">View Online<span class="caret"></span></span>
+                      
+            {{else}}
+                {{#if isActive}}
+                    {{#if findInLibraryLink}}
+                        <span class=" js-uresolver-link uoa-lib-uresolver-link js-find-in-library" {{action "openFindInLibrary"}}>Find In Library <span class="caret"></span></span>
+                    {{/if}}
+                    {{#if viewOnlineLink}}
+                        <span class=" js-uresolver-link uoa-lib-uresolver-link js-view-on-line" {{action "openViewOnlineLinks"}}>View Online<span class="caret"></span></span>
+                    {{/if}}               
+                {{else}}
+                     <span class=" uoa-lib-uresolver-link ">  No related link in library<span class="caret"></span></span>
+                {{/if}}
+            {{/if}}        
+        </div>
+        <div class="uoa-lib-uresolver-holder uoa-lib-no-display" aria-live="assertive">
+            <div class='uoa-lib-uresolver-hide-button' {{action "closePanel"}}><span class='uoa-lib-icon-label'>Close</span> <span class='glyphicons glyphicons-remove'></span></div>
+            <iframe></iframe>
+        </div>
+    </div>

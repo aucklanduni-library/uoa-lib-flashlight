@@ -1,0 +1,33 @@
+<div class="container uoa-lib-spacer-t-1 uoa-lib-spacer-b-5  uoa-lib-container-md uoa-lib-no-padding" id="main-content">
+
+    <div class="row ">
+        <div class="col-sm-12">
+            <h1 class="uoa-lib-header-menu">{{get facetsDescription.displayNameLookupMap facetKey}}</h1>
+        </div>
+        <div class="col-sm-12 uoa-lib-spacer-b-2">
+            {{input value=(mut filteringTerm) class="uoa-lib-search-box uoa-lib-facet-search" name="s" autofocus=true
+                    placeholder=(concat 'Search ' (lower-case-string (get facetsDescription.displayNamePluralLookupMap facetKey)) "..." )}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            {{component this.browseNavigationComponentName facetKey=facetKey allFacetGroups=allFacetGroups currentFacetGroup=currentFacetGroup}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 uoa-lib-index uoa-lib-minor-badges uoa-lib-spacer-t-3" role="navigation" aria-label="Facets">
+            {{component this.browseGroupComponentName currentFacetGroup=currentFacetGroup facetsDescription=facetsDescription viewItem=(action viewItem) viewFacetedSearch=(action viewFacetedSearch)
+                                      values=values offset=offset pageSize=pageSize totalValueCount=totalValueCount skipTo=(action skipTo) browseItemComponentName=browseItemComponentName
+                                      facetedSearchBaseRouteName=facetedSearchBaseRouteName }}
+        </div>
+    </div>
+
+    {{#if (array-with-n-or-more currentFacetGroup.items pageSize)}}
+        <div class="row">
+            <div class="col-sm-12">
+                {{component this.browseNavigationComponentName facetKey=facetKey allFacetGroups=allFacetGroups currentFacetGroup=currentFacetGroup}}
+            </div>
+        </div>
+    {{/if}}
+</div>
